@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     PlayerMovement playerMovement;
     Animator animator;
 
+    //Method Awake() digunakan untuk membuat singleton dari Player pada saat GameObject pertama kali diinstansiasi
     void Awake()
     {
         if (instance == null)
@@ -20,11 +21,14 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // Start is called before the first frame update
+    
+    //Method Start() digunakan untuk memuat component dan script lain di Player ke dalam variabel
     void Start()
     {
+        //Mengambil informasi dari script PlayerMovemet.cs
         playerMovement = GetComponent<PlayerMovement>();
 
+        //Mencari GameObject EngineEffect dan mengambil informasi component animator dari EngineEffect
         GameObject engineEffect = GameObject.Find("EngineEffect");
         if (engineEffect != null)
         {
@@ -36,7 +40,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Menjalankan method Move dari playerMovement dengan frekuensi tertentu untuk menggerakkan karakter
     void FixedUpdate()
     {
         if (playerMovement != null)
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Menjalankan method setBool dari animator setelah method FixedUpdate() untuk menjalankan animasi
     void LateUpdate()
     {
         if (animator != null && playerMovement != null)
