@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("EngineEffect not found");
+            Debug.LogWarning(this + "tidak ada EngineEffect");
         }
     }
 

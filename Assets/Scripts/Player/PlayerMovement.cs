@@ -8,11 +8,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 timeToFullSpeed;
     [SerializeField] Vector2 timeToStop;
     [SerializeField] Vector2 stopClamp;
+    [SerializeField] Vector2 offset;
+    [SerializeField] Camera MainCamera;
     Vector2 moveDirection;
     Vector2 moveVelocity;
     Vector2 moveFriction;
     Vector2 stopFriction;
     Rigidbody2D rb;
+    Vector2 screenBounds;
 
     /*
     Method Start() digunakan untuk memuat component di Player ke dalam variabel serta 
@@ -24,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb == null)
         {
-            Debug.LogError("Rigidbody2D not found");
+            Debug.LogWarning(this + "tidak ada Rigidbody2D");
         }
 
         //melakukan kalkulasi awal untuk moveVelocity, moveFriction, dan stopFriction
@@ -32,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
         moveFriction = -2 * maxSpeed / (timeToFullSpeed * timeToFullSpeed);
         stopFriction = -2 * maxSpeed / (timeToStop * timeToStop);
         //Debug.Log("moveVelocity: " + moveVelocity + "moveFriction: " + moveFriction + "stopFriction: " + stopFriction);
+
+        //Menginisialisasi batas awal kamera
+        screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
     }
 
     //Method untuk menggerakkan karakter berdasarkan input player
@@ -55,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Abs(rb.velocity.y) < stopClamp.y) 
                 rb.velocity = new Vector2(rb.velocity.x, 0);
         }
+
+        MoveBound();
 
         //Debug.Log("velocityX: " + rb.velocity.x + "velocityY: " + rb.velocity.y);
         //Debug.Log("friction: " + GetFriction());
@@ -80,10 +88,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //untuk sementara dikosongkan dulu
+    //Method Untuk memberikan batas agar player tidak dapat bergerak keluar layar
     public void MoveBound()
     {
-
+        rb.position = new Vector2(
+            Mathf.Clamp(rb.position.x, -(screenBounds.x - offset.x), screenBounds.x - offset.x),
+            Mathf.Clamp(rb.position.y, -(screenBounds.y), screenBounds.y - offset.y)
+        );
     }
 
     //Method yang digunakan untuk mengembalikan nilai true jika karakter bergerak dan sebaliknya
