@@ -340,6 +340,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 488833494212150858, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 488833494212150858, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 623646583326443837, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 623646583326443837, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563359577583066192, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563359577583066192, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.72
+      objectReference: {fileID: 0}
     - target: {fileID: 4713358345422017812, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.0732262
@@ -383,6 +407,14 @@ PrefabInstance:
     - target: {fileID: 5556652563574504257, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
       propertyPath: m_Name
       value: WeaponRack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338190350133600421, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338190350133600421, guid: 517e0356b921e214399f61e18b6f991f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.62
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -473,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8510425942336817012, guid: b8fdad6dccfde4f44a20e15269b5090b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.476
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 8510425942336817012, guid: b8fdad6dccfde4f44a20e15269b5090b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -522,11 +554,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4317695533926085870, guid: baf6c6a234f2cd54dab65311d994f70e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.81
+      value: 5.36
       objectReference: {fileID: 0}
     - target: {fileID: 4317695533926085870, guid: baf6c6a234f2cd54dab65311d994f70e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 4317695533926085870, guid: baf6c6a234f2cd54dab65311d994f70e, type: 3}
       propertyPath: m_LocalPosition.z
