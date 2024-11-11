@@ -30,6 +30,7 @@ public class WeaponPickup : MonoBehaviour
     void TurnVisual(bool On)
     {
         gameObject.SetActive(!On);
+        weapon.gameObject.SetActive(On);
     }
 
     //Method untuk menonaktifkan Weapon Pickup dan menghapus Weapon sebelumnya yang digunakan

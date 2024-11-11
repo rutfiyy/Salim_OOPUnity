@@ -62,8 +62,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0);
         }
 
-        MoveBound();
-
         //Debug.Log("velocityX: " + rb.velocity.x + "velocityY: " + rb.velocity.y);
         //Debug.Log("friction: " + GetFriction());
     }

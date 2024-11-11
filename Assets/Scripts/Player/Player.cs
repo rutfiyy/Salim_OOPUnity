@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     {
         if (animator != null && playerMovement != null)
         {
+            playerMovement.MoveBound();
             animator.SetBool("IsMoving", playerMovement.IsMoving());
         }
     }
