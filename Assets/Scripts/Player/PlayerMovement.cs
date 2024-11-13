@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 timeToStop;
     [SerializeField] Vector2 stopClamp;
     [SerializeField] Vector2 offset;
-    [SerializeField] Camera MainCamera;
+    [SerializeField] Camera mainCamera;
     Vector2 moveDirection;
     Vector2 moveVelocity;
     Vector2 moveFriction;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("moveVelocity: " + moveVelocity + "moveFriction: " + moveFriction + "stopFriction: " + stopFriction);
 
         //Menginisialisasi batas awal kamera
-        screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
     }
 
     //Method untuk menggerakkan karakter berdasarkan input player

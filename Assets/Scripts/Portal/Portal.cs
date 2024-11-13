@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
     void Update()
     {
         //Memeriksa apakah player telah equip weapon
-        if (player.GetComponentInChildren<Weapon>() == null)
+        if (player.GetComponentInChildren<Weapon>() == null && player == null)
         {
             return;
         }

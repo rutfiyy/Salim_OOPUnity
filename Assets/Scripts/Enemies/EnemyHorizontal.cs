@@ -3,32 +3,34 @@ using UnityEngine;
 public class EnemyHorizontal : Enemy
 {
     private bool movingRight = true;
+    private Vector3 screenBounds;
 
     public void Start()
     {
-        // Randomly choose spawn position (left or right of the screen).
-        float spawnX = Random.Range(-8f, 8f);
-        transform.position = new Vector3(spawnX, transform.position.y, 0);
-    }
-
-    // Override the Move method to implement horizontal movement.
-    public override void Move()
-    {
-        if (movingRight)
+        if (mainCamera != null)
         {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);  // Move to the right.
+            screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         }
         else
         {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);  // Move to the left.
+            Debug.LogError("mainCamera is not assigned in EnemyHorizontal.");
         }
 
-        // Reverse direction if out of bounds.
-        if (transform.position.x > 8f)
+        float spawnX = Random.Range(-screenBounds.x, screenBounds.x);
+        transform.position = new Vector3(spawnX, transform.position.y, 0);
+    }
+
+    public override void Move()
+    {
+        if (mainCamera == null) return;  // Prevent movement if mainCamera is null
+
+        rb.velocity = new Vector2(movingRight ? moveSpeed : -moveSpeed, rb.velocity.y);
+
+        if (transform.position.x > screenBounds.x)
         {
             movingRight = false;
         }
-        else if (transform.position.x < -8f)
+        else if (transform.position.x < -screenBounds.x)
         {
             movingRight = true;
         }

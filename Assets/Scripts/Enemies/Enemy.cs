@@ -2,26 +2,41 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int level;  // Each enemy has a level.
-    public Sprite enemySprite;  // Sprite for the enemy.
-    protected Rigidbody2D rb;  // Rigidbody2D for movement.
-    public float moveSpeed = 2f;  // Base movement speed.
+    public int level;
+    public Sprite enemySprite;
+    protected Rigidbody2D rb;
+    public float moveSpeed = 2f;
 
-    void Awake()
+    public Camera mainCamera;
+
+    public virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D component.
-        rb.gravityScale = 0;  // Disable gravity for the enemy.
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+
+        // Assign mainCamera if it’s not set in the Inspector
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                Debug.LogError("No main camera found. Assign a camera in the Inspector.");
+            }
+        }
     }
 
-    // Method to set the sprite for the enemy.
     public void SetSprite(Sprite sprite)
     {
         GetComponent<SpriteRenderer>().sprite = sprite;
     }
 
-    // Abstract method to be implemented by subclasses to define movement behavior.
     public virtual void Move()
     {
-        // This will be overridden in child classes.
+        // Overridden by child classes
+    }
+
+    void Update()
+    {
+        Move();
     }
 }
