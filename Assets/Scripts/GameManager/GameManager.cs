@@ -38,5 +38,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning(this + "tidak menemukan Main Camera");
         }
+        GameObject enemyClickSpawner = GameObject.Find("EnemyClickSpawner");
+        if (enemyClickSpawner != null)
+        {
+            DontDestroyOnLoad(enemyClickSpawner);//Menyimpan EnemyClickSpawner saat berganti screen
+        }
+        else
+        {
+            Debug.LogWarning(this + "tidak menemukan EnemyClickSpawner");
+        }
     }
 }

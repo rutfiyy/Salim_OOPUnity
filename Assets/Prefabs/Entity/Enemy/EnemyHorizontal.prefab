@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1852747207959945794}
   - component: {fileID: 398501695882664091}
   - component: {fileID: 8275922969781821116}
+  - component: {fileID: 2945667241023423459}
   m_Layer: 0
   m_Name: EnemyHorizontal
   m_TagString: Enemy
@@ -216,5 +217,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d243d56496f994b8a30ed99fa27825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
   damage: 10
+--- !u!114 &2945667241023423459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977219797187038985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85569df5aadf1054f951762f8ce47419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: cfc3dc5da0ec08e419f3ece7041c05d5, type: 2}
+  isInvincible: 0

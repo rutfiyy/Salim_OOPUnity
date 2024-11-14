@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float shootIntervalInSeconds = 3f;
 
     [Header("Bullets")]
-    public Bullet bullet; // Prefab Bullet
-    [SerializeField] private Transform bulletSpawnPoint; // Bullet spawn point
+    public Bullet bullet;
+    [SerializeField] private Transform bulletSpawnPoint;
 
     [Header("Bullet Pool")]
     private IObjectPool<Bullet> objectPool;
@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        // Initialize the bullet object pool
+        // Membuat object pool
         objectPool = new ObjectPool<Bullet>(
             CreateBullet,
             OnGetBullet,
@@ -34,52 +34,56 @@ public class Weapon : MonoBehaviour
             maxSize
         );
 
-        // Find BulletSpawnPoint if not assigned in the Inspector
+        // Memeriksa apakah BulletSpawnPoint telah ditambahkan
         if (bulletSpawnPoint == null)
         {
             bulletSpawnPoint = transform.Find("BulletSpawnPoint");
 
             if (bulletSpawnPoint == null)
             {
-                Debug.LogWarning("BulletSpawnPoint not found as a child of Weapon.");
+                Debug.LogWarning(this + " tidak menemukan BulletSpawnPoint");
             }
             else
             {
-                // Set initial position with an offset if necessary
+                // Memposisikan BulletSpawnPoint didepan Player agar bullet tidak mengenai Player
                 bulletSpawnPoint.position = new Vector3(0,1,0);
             }
         }
     }
 
+    // Menambahkan Bullet ke ObjectPool
     private Bullet CreateBullet()
     {
         Bullet newBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        newBullet.SetObjectPool(objectPool); // Assign pool to bullet
+        newBullet.SetObjectPool(objectPool);
         return newBullet;
     }
 
+    // Mengaktifkan Bullet di dalam pool yang akan digunakan
     private void OnGetBullet(Bullet bullet)
     {
-        bullet.gameObject.SetActive(true); // Activate bullet
-        bullet.transform.position = bulletSpawnPoint.position;
-        bullet.transform.rotation = bulletSpawnPoint.rotation;
+        bullet.gameObject.SetActive(true);
+        bullet.transform.position = bulletSpawnPoint.position; // Mereset posisi bullet
+        bullet.transform.rotation = bulletSpawnPoint.rotation; // Mereset rotasi bullet
     }
 
+    // Menonaktifkan Bullet yang sudah tidak digunakan
     private void OnReleaseBullet(Bullet bullet)
     {
-        bullet.gameObject.SetActive(false); // Deactivate bullet
+        bullet.gameObject.SetActive(false);
     }
 
+    // Menghancurkan Bullet jika ObjectPool sudah penuh
     private void OnDestroyBullet(Bullet bullet)
     {
-        Destroy(bullet.gameObject); // Destroy bullet when pool limit is reached
+        Destroy(bullet.gameObject);
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        // Shoot at the specified interval
+        // Menembakkan Bullet dalam interval waktu
         if (timer >= shootIntervalInSeconds)
         {
             Shoot();
@@ -91,7 +95,7 @@ public class Weapon : MonoBehaviour
     {
         if (objectPool != null)
         {
-            Bullet bulletInstance = objectPool.Get();
+            Bullet bulletInstance = objectPool.Get(); // Mengambil Bullet dari ObjectPool
             return bulletInstance;
         }
         return null;

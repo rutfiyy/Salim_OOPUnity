@@ -14,37 +14,33 @@ public class InvisibilityComponent : MonoBehaviour
 
     void Start()
     {
-        // Get the SpriteRenderer to be used,
-        // alternatively you could set it from the inspector.
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Get the material that the SpriteRenderer uses, 
-        // so we can switch back to it after the flash ended.
+        // menyimpan material yang sedang digunakan
         originalMaterial = spriteRenderer.material;
     }
 
     public void Flash()
     {
-        StartCoroutine(FlashRoutine());
+        StartCoroutine(FlashRoutine());// Menjalankan coroutine untuk efek blinking
     }
 
     private IEnumerator FlashRoutine()
     {
         count = 0;
-        isInvincible = true;
-        // Swap to the flashMaterial.
+        isInvincible = true; // Fase invincible
+        // Blinking sebanyak blinkingCount
         while (count < blinkingCount)
         {
-            spriteRenderer.material = blinkMaterial;
+            spriteRenderer.material = blinkMaterial; // Mengubah material
 
-            // Pause the execution of this function for "duration" seconds.
+            // Delay blink
             yield return new WaitForSeconds(blinkInterval);
 
-            // After the pause, swap back to the original material.
-            spriteRenderer.material = originalMaterial;  
+            spriteRenderer.material = originalMaterial; // Mengembalikan material 
             count++; 
         }
-        isInvincible = false;
+        isInvincible = false; // Fase invincible selesai
     }
 
 }

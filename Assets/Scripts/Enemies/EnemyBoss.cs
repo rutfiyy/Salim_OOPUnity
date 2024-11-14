@@ -4,8 +4,8 @@ using UnityEngine.Pool;
 public class EnemyBoss : EnemyHorizontal
 {
     public Bullet bullet;
-    public Transform bulletSpawnPoint;  // Where bullets will spawn from.
-    public float shootInterval = 2f;    // How often the boss shoots.
+    public Transform bulletSpawnPoint;
+    public float shootInterval = 2f;
 
     private float shootTimer;
 
@@ -19,7 +19,7 @@ public class EnemyBoss : EnemyHorizontal
     public override void Awake()
     {
         base.Awake();
-        // Initialize the bullet object pool
+        // Menginisialisasi ObjectPool
         objectPool = new ObjectPool<Bullet>(
             CreateBullet,
             OnGetBullet,
@@ -30,33 +30,33 @@ public class EnemyBoss : EnemyHorizontal
             maxSize
         );
 
-        // Find BulletSpawnPoint if not assigned in the Inspector
+        // Mencari BulletSpawnPoint
         if (bulletSpawnPoint == null)
         {
             bulletSpawnPoint = transform.Find("BulletSpawnPoint");
 
             if (bulletSpawnPoint == null)
             {
-                Debug.LogWarning("BulletSpawnPoint not found as a child of Weapon.");
+                Debug.LogWarning(this + " tidak menemukan BulletSpawnPoint");
             }
             else
             {
-                bulletSpawnPoint.position = new Vector3(0, 1, 0); // Initial offset
+                bulletSpawnPoint.position = new Vector3(0, 1, 0); // Memberikan offset pada BulletSpawnPoint
             }
         }
     }
 
     new void Start()
     {
-        base.Start();  // Ensure base Start() is called for movement initialization.
-        shootTimer = 0;
+        base.Start();
+        shootTimer = 0; // Menyiapkan timer untuk menembak
     }
 
     public override void Move()
     {
-        base.Move();  // Use the horizontal movement logic from EnemyHorizontal.
+        base.Move();
 
-        // Handle shooting at intervals.
+        // Menembak Bullet setiap interval waktu
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootInterval)
         {
@@ -68,25 +68,25 @@ public class EnemyBoss : EnemyHorizontal
     private Bullet CreateBullet()
     {
         Bullet newBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        newBullet.SetObjectPool(objectPool); // Assign pool to bullet
+        newBullet.SetObjectPool(objectPool);
         return newBullet;
     }
 
     private void OnGetBullet(Bullet bullet)
     {
-        bullet.gameObject.SetActive(true); // Activate bullet
+        bullet.gameObject.SetActive(true);
         bullet.transform.position = bulletSpawnPoint.position;
         bullet.transform.rotation = bulletSpawnPoint.rotation;
     }
 
     private void OnReleaseBullet(Bullet bullet)
     {
-        bullet.gameObject.SetActive(false); // Deactivate bullet
+        bullet.gameObject.SetActive(false);
     }
 
     private void OnDestroyBullet(Bullet bullet)
     {
-        Destroy(bullet.gameObject); // Destroy bullet when pool limit is reached
+        Destroy(bullet.gameObject);
     }
     
     public Bullet Shoot()

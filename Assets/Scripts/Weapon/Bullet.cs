@@ -9,34 +9,33 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private IObjectPool<Bullet> objectPool;
 
+    // Membuat ObjectPool
     public void SetObjectPool(IObjectPool<Bullet> pool)
     {
         objectPool = pool;
     }
 
-    void OnEnable()
+    // Mengambil informasi Rigidbody2D
+    void Awake()
     {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        rb.velocity = transform.up * bulletSpeed; // Move bullet forward
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void OnEnable()
     {
+        // Menggerakkan Bullet
         rb.velocity = transform.up * bulletSpeed;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        // Return bullet to the pool on collision
+        // Menonaktifkan Bullet jika bertabrakan dengan object
         objectPool?.Release(this);
     }
 
     void OnBecameInvisible()
     {
-        // Return bullet to pool when it goes off-screen
+        // Menonaktifkan Bullet jika Bullet keluar dari layar
         objectPool?.Release(this);
     }
 }
