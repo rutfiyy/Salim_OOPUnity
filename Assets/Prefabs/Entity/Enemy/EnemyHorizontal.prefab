@@ -179,6 +179,7 @@ MonoBehaviour:
   enemySprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
   moveSpeed: 2
   mainCamera: {fileID: 0}
+  spawner: {fileID: 8850293621201783637, guid: 7b313a3eda42f604896aedc854cd1773, type: 3}
 --- !u!114 &1852747207959945794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d4f1cdc31ca5143983b9dae297c0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 50
 --- !u!114 &8275922969781821116
 MonoBehaviour:
   m_ObjectHideFlags: 0

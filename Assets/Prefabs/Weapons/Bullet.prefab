@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  damage: 10
+  damage: 20
 --- !u!114 &6133992538222161581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,5 +208,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d243d56496f994b8a30ed99fa27825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
-  damage: 10
+  damage: 20

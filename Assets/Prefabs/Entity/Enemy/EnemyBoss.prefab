@@ -212,6 +212,7 @@ MonoBehaviour:
   enemySprite: {fileID: 0}
   moveSpeed: 2
   mainCamera: {fileID: 0}
+  spawner: {fileID: 729935518613596182, guid: 8dd2f7cf8049b984dbfe151e57c67da7, type: 3}
   bullet: {fileID: 3607453967875736057}
   bulletSpawnPoint: {fileID: 1676845267263956975}
   shootInterval: 2
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d4f1cdc31ca5143983b9dae297c0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 60
 --- !u!114 &2911060884589741097
 MonoBehaviour:
   m_ObjectHideFlags: 0

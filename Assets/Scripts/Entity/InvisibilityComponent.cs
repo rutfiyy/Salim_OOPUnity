@@ -38,6 +38,8 @@ public class InvisibilityComponent : MonoBehaviour
             yield return new WaitForSeconds(blinkInterval);
 
             spriteRenderer.material = originalMaterial; // Mengembalikan material 
+
+            yield return new WaitForSeconds(blinkInterval);
             count++; 
         }
         isInvincible = false; // Fase invincible selesai
