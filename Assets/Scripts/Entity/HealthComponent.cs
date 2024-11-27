@@ -20,4 +20,9 @@ public class HealthComponent : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public int GetHealth()
+    {
+        return health;
+    }
 }

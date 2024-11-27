@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class EnemyBoss : EnemyHorizontal
+public class EnemyBoss : EnemyHorizontalMovement
 {
     public Bullet bullet;
     public Transform bulletSpawnPoint;
@@ -16,9 +16,8 @@ public class EnemyBoss : EnemyHorizontal
     private readonly int defaultCapacity = 30;
     private readonly int maxSize = 100;
 
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
         // Menginisialisasi ObjectPool
         objectPool = new ObjectPool<Bullet>(
             CreateBullet,
@@ -46,16 +45,13 @@ public class EnemyBoss : EnemyHorizontal
         }
     }
 
-    new void Start()
+    void Start()
     {
-        base.Start();
         shootTimer = 0; // Menyiapkan timer untuk menembak
     }
 
-    public override void Move()
+    void Update()
     {
-        base.Move();
-
         // Menembak Bullet setiap interval waktu
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootInterval)

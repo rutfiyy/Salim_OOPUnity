@@ -1,31 +1,33 @@
 using UnityEngine;
 
-public class EnemyForward : Enemy
+public class EnemyForwardMovement : Enemy
 {
-    public override void Awake()
-    {
-        base.Awake();
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] Camera mainCamera;
+    Vector3 spawnPosition;
 
+    private void Awake()
+    {
+        // Menentukan posisi spawn
         if (mainCamera != null)
         {
-            // Menentukan posisi spawn
             float spawnX = Random.Range(0, Screen.width);
-            Vector3 spawnPosition = mainCamera.ScreenToWorldPoint(new Vector3(spawnX, Screen.height, mainCamera.transform.position.z));
+            spawnPosition = mainCamera.ScreenToWorldPoint(new Vector3(spawnX, Screen.height, mainCamera.transform.position.z));
             transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
         }
         else
         {
-            Debug.LogError(this + " tidak memiliki MainCamera");
+            Debug.LogError(this + " tidak menemukan MainCamera");
         }
     }
 
-    public override void Move()
+    private void Update()
     {
-        rb.velocity = new Vector2(0, -moveSpeed);  // Menggerakkan EnemyForward ke bawah
+        transform.Translate(moveSpeed * Time.deltaTime * Vector2.up);
     }
 
     void OnBecameInvisible()
     {
-        Destroy(gameObject);  // Menghancurkan EnemyForward saat keluar dari layar
+        transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
     }
 }

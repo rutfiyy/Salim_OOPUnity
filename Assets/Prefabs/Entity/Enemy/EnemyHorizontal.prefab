@@ -32,13 +32,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977219797187038985}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.57, y: 3.55, z: -0.12106506}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!212 &6879561876785729970
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -175,11 +175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1359530ccd854a143b3b3f825375fac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  enemySprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
+  level: 2
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   moveSpeed: 2
-  mainCamera: {fileID: 0}
-  spawner: {fileID: 8850293621201783637, guid: 7b313a3eda42f604896aedc854cd1773, type: 3}
+  mainCamera: {fileID: 9056181964676106438, guid: fcf9a81a5ca0a35449d6441ab38c718b, type: 3}
 --- !u!114 &1852747207959945794
 MonoBehaviour:
   m_ObjectHideFlags: 0

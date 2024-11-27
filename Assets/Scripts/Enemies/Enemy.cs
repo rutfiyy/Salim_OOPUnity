@@ -1,50 +1,29 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    public int level;
-    public Sprite enemySprite;
-    protected Rigidbody2D rb;
-    public float moveSpeed = 2f;
+  [SerializeField] protected int level;
 
-    public Camera mainCamera;
-    public EnemySpawner spawner;
+  public UnityEvent enemyKilledEvent;
 
-    // Akan dioverride oleh child class
-    public virtual void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
+  private void Start()
+  {
+    enemyKilledEvent ??= new UnityEvent();
+  }
 
-        // Memberikan MainCamera ke Enemy
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-            if (mainCamera == null)
-            {
-                Debug.LogError("Tidak ada camera pada " + this);
-            }
-        }
-    }
+  public void SetLevel(int level)
+  {
+    this.level = level;
+  }
 
-    // Memberikan sprite untuk Enemy
-    public void SetSprite(Sprite sprite)
-    {
-        GetComponent<SpriteRenderer>().sprite = sprite;
-    }
+  public int GetLevel()
+  {
+    return level;
+  }
 
-    public virtual void Move()
-    {
-        // Akan dioverride oleh child class
-    }
-
-    void Update()
-    {
-        Move();
-    }
-
-    void OnDestroy()
-    {
-        spawner.OnEnemyKilled();
-    }
+  private void OnDestroy()
+  {
+    enemyKilledEvent.Invoke();
+  }
 }

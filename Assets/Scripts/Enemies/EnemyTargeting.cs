@@ -1,23 +1,21 @@
 using UnityEngine;
 
-public class EnemyTargeting : Enemy
+public class EnemyTargetPlayer : Enemy
 {
-    public Transform player;
+    public float moveSpeed = 2f;
 
-    public override void Awake()
+    private Transform player;
+    [SerializeField] Camera mainCamera;
+    Rigidbody2D rb;
+
+    void Start()
     {
-        base.Awake();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-        GameObject playerObject = GameObject.FindWithTag("Player"); // Mencari tag Player
-        if (playerObject != null)
-        {
-            player = playerObject.transform;
-        }
-        else
-        {
-            Debug.LogError(this + " tidak menemukan Player");
-        }
-
+    private void Awake()
+    {
         // Menentukan posisi spawn
         if (mainCamera != null)
         {
@@ -31,21 +29,46 @@ public class EnemyTargeting : Enemy
         }
     }
 
-    public override void Move()
+    void FixedUpdate()
     {
-        if (player == null) return;  // Tidak bergerak jika tidak ada Player
-
-        // Bergerak menuju Player
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        if (player != null)
+        {
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = moveSpeed * Time.deltaTime * direction;
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Menghancurkan EnemyTargeting jika menabrak Player
-        if (collider.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
+    }
+
+    private void PickRandomPositions()
+    {
+        Vector2 randPos;
+        Vector2 dir;
+
+        if (Random.Range(-1, 1) >= 0)
+        {
+            dir = Vector2.right;
+        }
+        else
+        {
+            dir = Vector2.left;
+        }
+
+        if (dir == Vector2.right)
+        {
+            randPos = new(1.1f, Random.Range(0.1f, 0.95f));
+        }
+        else
+        {
+            randPos = new(-0.01f, Random.Range(0.1f, 0.95f));
+        }
+
+        transform.position = Camera.main.ViewportToWorldPoint(randPos) + new Vector3(0, 0, 10);
     }
 }

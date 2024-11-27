@@ -172,6 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  enemySprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
-  moveSpeed: 2
-  mainCamera: {fileID: 0}
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []

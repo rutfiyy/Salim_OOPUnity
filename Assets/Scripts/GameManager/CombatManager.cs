@@ -1,52 +1,52 @@
+using System.Collections;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
     public EnemySpawner[] enemySpawners;
+
     public float timer = 0;
     [SerializeField] private float waveInterval = 5f;
+
     public int waveNumber = 1;
+
     public int totalEnemies = 0;
+    public int points = 0;
 
-    bool waveInProgress = false;
-
-    void Update()
+    private void OnEnable()
     {
-        //Menjalankan timer untuk interval wave
-        if (!waveInProgress)
+        foreach (EnemySpawner spawner in enemySpawners)
+        {
+            spawner.combatManager = this;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (totalEnemies == 0)
             timer += Time.deltaTime;
-        
-        //Menjalankan wave selanjutnya dan mereset timer
-        if (!waveInProgress && timer >= waveInterval)
+
+        if (timer >= waveInterval)
         {
-            StartNextWave();
-            timer = 0; 
+            foreach (EnemySpawner spawner in enemySpawners)
+            {
+                if (spawner.spawnedEnemy.GetLevel() <= waveNumber && !spawner.isSpawning)
+                {
+                    spawner.ResetSpawnCount();
+
+                    totalEnemies += spawner.spawnCount;
+
+                    spawner.SpawnEnemy();
+                }
+            }
+
+            waveNumber++;
+            timer = 0;
         }
     }
 
-    void StartNextWave()
+    public void IncreaseKill()
     {
-        waveNumber++;
-        totalEnemies = 0;
-        waveInProgress = true;
-
-        //Mengaktifkan seluruh spawner
-        foreach (var spawner in enemySpawners)
-        {
-            spawner.ResetSpawner();
-            spawner.isSpawning = true;
-        }
-    }
-
-    public void CheckWaveCompletion()
-    {
-        //Memeriksa apakah wave telah berakhir
-        foreach (var spawner in enemySpawners)
-        {
-            if (spawner.totalKillWave > 0)
-                return;
-        }
-
-        waveInProgress = false;
+        totalEnemies--;
     }
 }

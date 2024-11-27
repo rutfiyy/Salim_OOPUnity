@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -7,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private int minimumKillsToIncreaseSpawnCount = 3;
     public int totalKill = 0;
-    public int totalKillWave = 0;
+    private int totalKillWave = 0;
 
     [SerializeField] private float spawnInterval = 3f;
 
@@ -21,58 +22,53 @@ public class EnemySpawner : MonoBehaviour
 
     public bool isSpawning = false;
 
-    float timer = 0;
-
-    void Start()
+    private void Start()
     {
-        ResetSpawner();
+        spawnCount = defaultSpawnCount;
     }
 
-    void Update()
-    {
-        //Meng-spawn enemy dengan interval waktu
-        if (isSpawning)
-        {
-            timer += Time.deltaTime;
-            if (timer >= spawnInterval && spawnCount > 0)
-            {
-                SpawnEnemy();
-                timer = 0;
-            }
-        }
-    }
-
-    //Method untuk spawn enemy
     public void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(spawnedEnemy);
-        enemy.spawner = this;
-        totalKillWave++;
-        combatManager.totalEnemies++;
-        spawnCount--;
+        StartCoroutine(IESpawnEnemy());
     }
 
-    //Method untuk mempersiapkan spawner
-    public void ResetSpawner()
+    IEnumerator IESpawnEnemy()
     {
-        spawnCount = defaultSpawnCount + (spawnCountMultiplier - 1) * multiplierIncreaseCount;
-        totalKillWave = 0;
+        isSpawning = true;
+
+        while (spawnCount > 0)
+        {
+            Enemy s = Instantiate(spawnedEnemy);
+
+            s.transform.parent = gameObject.transform;
+
+            s.enemyKilledEvent.AddListener(KillEnemy);
+            s.enemyKilledEvent.AddListener(combatManager.IncreaseKill);
+
+            spawnCount--;
+
+            yield return new WaitForSeconds(spawnInterval);
+        }
+
+        isSpawning = false;
     }
 
-    //Method untuk menghitung jumlah kill
-    public void OnEnemyKilled()
+    public void ResetSpawnCount()
+    {
+        if (totalKillWave >= minimumKillsToIncreaseSpawnCount)
+        {
+            spawnCountMultiplier += multiplierIncreaseCount;
+            minimumKillsToIncreaseSpawnCount *= spawnCountMultiplier;
+            totalKillWave = 0;
+        }
+
+        spawnCount = defaultSpawnCount * spawnCountMultiplier;
+    }
+
+    private void KillEnemy()
     {
         totalKill++;
-        totalKillWave--;
-
-        if (totalKill % minimumKillsToIncreaseSpawnCount == 0)
-        {
-            spawnCountMultiplier++;
-        }
-
-        if (totalKillWave <= 0)
-        {
-            combatManager.CheckWaveCompletion();
-        }
+        totalKillWave++;
+        combatManager.points += spawnedEnemy.GetLevel();
     }
 }
