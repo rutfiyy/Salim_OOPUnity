@@ -246,6 +246,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1571854578962435175}
     m_Modifications:
     - target: {fileID: 1597551307585352827, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 3607453967875736057, guid: 1e94c94046e02b447a3d0bb8e19ca6b7, type: 3}
+    - target: {fileID: 1597551307585352827, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1571854578962435175}
@@ -253,21 +257,33 @@ PrefabInstance:
       propertyPath: bulletSpawnPoint
       value: 
       objectReference: {fileID: 2511603909788568528}
+    - target: {fileID: 2012783782069167305, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012783782069167305, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012783782069167305, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2472574806618882235, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_Name
       value: Weapon1
       objectReference: {fileID: 0}
     - target: {fileID: 5398680373472880112, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.657
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5398680373472880112, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.8899994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5398680373472880112, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.03628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5398680373472880112, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -295,6 +311,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398680373472880112, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6797380296116346274, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174639703734859965, guid: b7769509317975544a0dcd8414a35c1b, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
